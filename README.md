@@ -25,8 +25,6 @@ This route is used to create a new user profile.
 }
 ```
 
-````
-
 **Response:**
 
 - **201 Created** if the profile is successfully created.
@@ -178,27 +176,3 @@ The server will run on `http://localhost:3000` by default.
 - **Mongoose**: MongoDB ODM (Object Data Modeling) library for Node.js.
 
 ---
-
-### Contributing
-
-Feel free to fork the repository, create a branch, and submit a pull request with your improvements or bug fixes.
-
----
-
-### License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-```
-
----
-
-You can copy and paste this directly into your `README.md` file. It includes:
-1. Detailed route documentation.
-2. Instructions on setting up the project and installing dependencies.
-3. Basic information about the technologies used.
-4. Contribution and licensing information.
-
-Let me know if you need any further changes!
-```
-````
