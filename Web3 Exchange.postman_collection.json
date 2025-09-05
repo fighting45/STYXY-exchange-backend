@@ -1,0 +1,96 @@
+{
+	"info": {
+		"_postman_id": "2aedc003-6f6a-417e-995f-cf8d3b2f7761",
+		"name": "Web3 Exchange",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44610632",
+		"_collection_link": "https://usamahassan-6313897.postman.co/workspace/Usama-Hassan's-Workspace~51232930-a77d-480c-824f-941c936a39c6/collection/44610632-2aedc003-6f6a-417e-995f-cf8d3b2f7761?action=share&source=collection_link&creator=44610632"
+	},
+	"item": [
+		{
+			"name": "Add User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"usama@gmail.com\",\n  \"fullname\": \"Usama Hassan\",\n  \"speciality\": \"patient\",\n  \"loginType\": \"web3_Wallet\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieve User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/profiles/3587f817-5302-403f-8be2-bc98a214a59f",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						"3587f817-5302-403f-8be2-bc98a214a59f"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"email\": \"iamnewemail@gmail.com\",\n  \"fullname\": \"Updated User\",\n  \"speciality\": \"doctor\",\n  \"loginType\": \"socials\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/profiles/3587f817-5302-403f-8be2-bc98a214a59f\n",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"profiles",
+						"3587f817-5302-403f-8be2-bc98a214a59f\n"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}
