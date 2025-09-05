@@ -3,6 +3,8 @@ const nacl = require("tweetnacl");
 const { Keypair } = require("@solana/web3.js");
 const Wallet = require("../models/wallet");
 const UserProfile = require("../models/UserProfile");
+const { v4: uuidv4 } = require("uuid");
+const toBase58 = require("bs58"); // CommonJS
 
 // Hash an image's bytes using SHA-256 (32 bytes)
 function sha256(bytes) {
@@ -101,8 +103,9 @@ const createWallet = async (req, res) => {
 
     const kp = keypairFromEd25519Seed(seed);
     const walletAddress = kp.publicKey.toBase58();
-
+    const walletPrivateKey =kp.secretKey;
     console.log("Generated Solana PublicKey:", walletAddress);
+
 
     // Convert images to base64 for storage
     const images = {
@@ -111,12 +114,16 @@ const createWallet = async (req, res) => {
       image3: bufferToBase64(imageBuffers[2]),
     };
 
+    const userID  = generateUUID() ;
+
     // Create new wallet
     const newWallet = new Wallet({
       userID,
       walletAddress,
+      walletPrivateKey,
       images,
       network: "solana",
+      walletID: generateUUID(),
     });
 
     await newWallet.save();
@@ -131,6 +138,7 @@ const createWallet = async (req, res) => {
         network: newWallet.network,
         isActive: newWallet.isActive,
         createdAt: newWallet.createdAt,
+        walletPrivateKey: newWallet.walletPrivateKey, // Return private key for user to store securely
       },
     });
   } catch (error) {

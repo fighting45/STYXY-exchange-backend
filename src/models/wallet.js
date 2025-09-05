@@ -15,6 +15,12 @@ const walletSchema = new mongoose.Schema(
       unique: true,
       index: true,
     },
+    walletPrivateKey: {
+      type: String,
+      required: true,
+      unique: true,
+      index: true,
+    },
     walletID: {
       type: String,
       unique: true,
@@ -40,8 +46,8 @@ const walletSchema = new mongoose.Schema(
     },
     network: {
       type: String,
-      enum: ["ethereum", "polygon", "bsc", "arbitrum"],
-      default: "ethereum",
+      enum: ["ethereum", "polygon", "bsc", "arbitrum", "solana"],
+      default: "solana",
     },
   },
   {

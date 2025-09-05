@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "2aedc003-6f6a-417e-995f-cf8d3b2f7761",
+		"_postman_id": "d0ad156d-3fc0-4fb8-9320-e661f14eac4c",
 		"name": "Web3 Exchange",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "44610632",
-		"_collection_link": "https://usamahassan-6313897.postman.co/workspace/Usama-Hassan's-Workspace~51232930-a77d-480c-824f-941c936a39c6/collection/44610632-2aedc003-6f6a-417e-995f-cf8d3b2f7761?action=share&source=collection_link&creator=44610632"
+		"_exporter_id": "24458505"
 	},
 	"item": [
 		{
@@ -14,7 +13,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"usama@gmail.com\",\n  \"fullname\": \"Usama Hassan\",\n  \"speciality\": \"patient\",\n  \"loginType\": \"web3_Wallet\"\n}",
+					"raw": "{\n  \"email\": \"ehtasham@gmail.com\",\n  \"fullname\": \"ehtasham\",\n  \"speciality\": \"patient\",\n  \"loginType\": \"socials\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -56,13 +55,13 @@
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "UpdateUser",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"iamnewemail@gmail.com\",\n  \"fullname\": \"Updated User\",\n  \"speciality\": \"doctor\",\n  \"loginType\": \"socials\"\n}",
+					"raw": "{\n  \"email\": \"ia@gmail.com\",\n  \"fullname\": \"Updated User\",\n  \"speciality\": \"doctor\",\n  \"loginType\": \"socials\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -70,7 +69,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/profiles/3587f817-5302-403f-8be2-bc98a214a59f\n",
+					"raw": "http://localhost:3000/profiles/a3db872e-e7cc-46b0-becc-7bbc822dfe0d",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -78,17 +77,76 @@
 					"port": "3000",
 					"path": [
 						"profiles",
-						"3587f817-5302-403f-8be2-bc98a214a59f\n"
+						"a3db872e-e7cc-46b0-becc-7bbc822dfe0d"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "New Request",
+			"name": "CreateWallet",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image1",
+							"type": "file",
+							"src": "postman-cloud:///1f08a247-0a8e-4ce0-bf5e-f5b52b8ccd51"
+						},
+						{
+							"key": "image2",
+							"type": "file",
+							"src": "postman-cloud:///1f08a247-b10f-4510-ac2c-1221eaecf76a"
+						},
+						{
+							"key": "image3",
+							"type": "file",
+							"src": "postman-cloud:///1f08a248-9938-4e90-b250-b5882986408a"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3000/wallet/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallet",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetWallet",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"url": {
+					"raw": "http://localhost:3000/wallet/b368c7e2-85b6-4fa3-b494-ed0ec34b9e8c",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"wallet",
+						"b368c7e2-85b6-4fa3-b494-ed0ec34b9e8c"
+					]
+				}
 			},
 			"response": []
 		}
