@@ -1,0 +1,21 @@
+version: "3.7"
+
+services:
+  vault:
+    image: hashicorp/vault:latest
+    container_name: vault
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root # Root token for dev mode
+      VAULT_DEV_LISTEN_ADDRESS: "0.0.0.0:8200"
+    ports:
+      - "8200:8200" # Expose Vault on port 8200
+    cap_add:
+      - IPC_LOCK # Allow Vault to lock memory (for production use only)
+    volumes:
+      - vault-data:/vault/file # Persist Vault data in a Docker volume
+    restart: unless-stopped
+    command: server -dev # Start Vault in dev mode
+
+volumes:
+  vault-data:
+    driver: local
