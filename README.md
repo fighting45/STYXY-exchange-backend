@@ -6,7 +6,7 @@ This is the backend for the **Styxy Exchange** project, which handles user profi
 
 ### 1. **POST /profiles**
 
-This route is used to create a new user profile.
+This route is used to create a new user profile, when successfully created it sends the created profile and the access token valid for "15min" as a response.
 
 - **Request Body**:
   - `email`: The email of the user (e.g., `"me1@gmail.com"`).
@@ -32,11 +32,12 @@ This route is used to create a new user profile.
 
 ### 2. **GET /profiles/\:userID**
 
-This route fetches the profile of a user by their `userID`.
+This route fetches the profile of a user by their `userID` and by providing access token in as the auth header as a bearer token.
 
 - **URL Parameters**:
 
   - `userID`: The unique ID of the user.
+  - `accessToken`: Passed as a bearer in the auth while sending request.
 
 **Example Request:**
 
@@ -154,7 +155,8 @@ PORT=3000
 ```
 
 - `DB_URI`: The connection string for your MongoDB database (local or Atlas).
-- `PORT`: The port on which the backend will run (default is `3000`).
+- `ENCRYPTION_KEY`: The key used as a seed for encrypting private key.
+- `ACCESS_TOKEN_SECRET`: The secret key used to create access token.
 
 ### Start the Server
 
@@ -162,6 +164,12 @@ To start the server, run the following command:
 
 ```bash
 npm start
+```
+
+To start the server dev friendly, run the following command:
+
+```bash
+npm run dev
 ```
 
 The server will run on `http://localhost:3000` by default.
@@ -174,5 +182,6 @@ The server will run on `http://localhost:3000` by default.
 - **Express**: Web framework for Node.js.
 - **MongoDB**: Database to store user profiles and wallets.
 - **Mongoose**: MongoDB ODM (Object Data Modeling) library for Node.js.
+- **Docker**: Docker vault used to store and fetch encrypted private key of the generated wallets.
 
 ---

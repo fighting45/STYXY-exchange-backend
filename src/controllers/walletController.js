@@ -22,12 +22,6 @@ const createWallet = async (req, res) => {
       req.files.image3[0].buffer,
     ];
 
-    // Convert images to base64 for storage
-    // const images = {
-    //   image1: bufferToBase64(imageBuffers[0]),
-    //   image2: bufferToBase64(imageBuffers[1]),
-    //   image3: bufferToBase64(imageBuffers[2]),
-    // };
     const { newWallet, base58PrivateKey } =
       await walletServices.createWalletInDB(imageBuffers);
     if (!newWallet || !base58PrivateKey) console.log("No wallet created");

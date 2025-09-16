@@ -34,12 +34,10 @@ async function createWalletInDB(imagesBuffers) {
   const { encryptedPrivateKey, iv } =
     privateKeyServices.encryptPrivateKey(base58PrivateKey); //returns iv and the private key
   vaultService.storePrivateKey(userID, encryptedPrivateKey, iv);
-  // const images = imagesBuffers.map((buf) => cryptoService.bufferToBase64(buf)); //if need to store images later into db
 
   const newWallet = new Wallet({
     userID,
     walletAddress,
-    // images: { image1: images[0], image2: images[1], image3: images[2] },
     network: "solana",
   });
   await newWallet.save();
