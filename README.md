@@ -89,6 +89,7 @@ This route creates a wallet for a user. It accepts **3 images** as part of the r
 - **Request Body**:
 
   - **3 image files**: The images should be uploaded as files (e.g., `image1`, `image2`, `image3`).
+  - **Network**: Provide the network i.e. "Ethereum" or "Solana".
 
 **Example Request:**
 
@@ -99,13 +100,15 @@ Content-Type: multipart/form-data
   image1: <image_file_1>,
   image2: <image_file_2>,
   image3: <image_file_3>
+  Network: <Ethereum> or <Solana>
 }
+
 ```
 
 **Response:**
 
 - **201 Created** with wallet details if the wallet is successfully created.
-- **400 Bad Request** if any image is missing or invalid.
+- **400 Bad Request** if any image is missing/invalid or the network is not provided.
 
 ### 5. **GET /wallets/\:userID**
 

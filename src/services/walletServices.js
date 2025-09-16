@@ -9,7 +9,8 @@ const generateUUID = () => {
   return uuidv4();
 };
 
-async function generateWalletFromImages(imageBuffers) {
+async function generateWalletFromImages(imageBuffers, network) {
+  let kp;
   const ikm = cryptoService.concatImageHashes(imageBuffers);
   const saltUuid = generateUUID();
   const salt = Buffer.from(`solana-salt-${saltUuid}`);
@@ -18,32 +19,46 @@ async function generateWalletFromImages(imageBuffers) {
     info: "myapp-v1-image-seed",
     length: 32,
   });
+  if (network === "solana") {
+    kp = cryptoService.keypairFromEd25519Seed(seed);
+  } else {
+    kp = cryptoService.ethKeypairFromSeed(seed);
+  }
 
-  const kp = cryptoService.keypairFromEd25519Seed(seed);
-
-  return { kp, seed, saltUuid };
+  return kp;
 }
 
-async function createWalletInDB(imagesBuffers) {
-  const { kp } = await generateWalletFromImages(imagesBuffers);
-  const walletAddress = kp.publicKey.toBase58();
-  const walletPrivateKey = kp.secretKey;
-  const privateKeyBuffer = Buffer.from(walletPrivateKey);
-  const base58PrivateKey = bs58.encode(privateKeyBuffer);
-  const userID = generateUUID();
+async function createWalletInDB(imagesBuffers, network) {
+  let walletAddress;
+  let privateKey;
+  let userID;
+
+  const kp = await generateWalletFromImages(imagesBuffers, network);
+
+  if (network === "solana") {
+    walletAddress = kp.publicKey.toBase58();
+    const walletPrivateKey = kp.secretKey;
+    const privateKeyBuffer = Buffer.from(walletPrivateKey);
+    privateKey = bs58.encode(privateKeyBuffer);
+    userID = generateUUID();
+  } else {
+    walletAddress = kp.address;
+    privateKey = kp.privateKey;
+    userID = generateUUID();
+  }
   const { encryptedPrivateKey, iv } =
-    privateKeyServices.encryptPrivateKey(base58PrivateKey); //returns iv and the private key
+    privateKeyServices.encryptPrivateKey(privateKey); //returns iv and the private key
   vaultService.storePrivateKey(userID, encryptedPrivateKey, iv);
 
   const newWallet = new Wallet({
     userID,
     walletAddress,
-    network: "solana",
+    network: network,
   });
   await newWallet.save();
   console.log("Wallet saved successfully:", newWallet);
 
-  return { newWallet, base58PrivateKey };
+  return { newWallet, privateKey };
 }
 
 async function getWalletByUserID(userID) {

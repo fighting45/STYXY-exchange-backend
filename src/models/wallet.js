@@ -17,8 +17,7 @@ const walletSchema = new mongoose.Schema(
 
     network: {
       type: String,
-      enum: ["ethereum", "polygon", "bsc", "arbitrum", "solana"],
-      default: "solana",
+      enum: ["ethereum", "solana"],
     },
   },
   {

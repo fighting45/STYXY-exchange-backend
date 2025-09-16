@@ -1,5 +1,3 @@
-const UserProfile = require("../models/UserProfile");
-// const {authenticateToken} = require("../auth/authMiddleware");
 const profileController = require("../controllers/profileController");
 
 const express = require("express");

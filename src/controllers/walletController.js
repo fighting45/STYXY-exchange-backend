@@ -1,4 +1,3 @@
-const { bufferToBase64 } = require("../services/cryptoServices");
 const { decryptPrivateKey } = require("../services/privateKeyServices");
 const { getPrivateKey } = require("../services/vaultService");
 const walletServices = require("../services/walletServices");
@@ -14,7 +13,13 @@ const createWallet = async (req, res) => {
     ) {
       return res.status(400).json({ message: "All three images are required" });
     }
-
+    //validate Network
+    const network = req.body.network.toLowerCase();
+    if (network !== "solana" && network !== "ethereum") {
+      return res.status(400).json({
+        message: "Please provide the wallet network 'ethereum' or 'solana",
+      });
+    }
     // Extract image buffers
     const imageBuffers = [
       req.files.image1[0].buffer,
@@ -22,9 +27,11 @@ const createWallet = async (req, res) => {
       req.files.image3[0].buffer,
     ];
 
-    const { newWallet, base58PrivateKey } =
-      await walletServices.createWalletInDB(imageBuffers);
-    if (!newWallet || !base58PrivateKey) console.log("No wallet created");
+    const { newWallet, privateKey } = await walletServices.createWalletInDB(
+      imageBuffers,
+      network
+    );
+    if (!newWallet || !privateKey) console.log("No wallet created");
     res.status(201).json({
       message: "Wallet created successfully",
       wallet: {
@@ -32,7 +39,7 @@ const createWallet = async (req, res) => {
         userID: newWallet.userID,
         network: newWallet.network,
         createdAt: newWallet.createdAt,
-        walletPrivateKey: base58PrivateKey, // Return private key for user to store securely
+        walletPrivateKey: privateKey, // Return private key for user to store securely
       },
     });
   } catch (error) {

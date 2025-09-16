@@ -1,7 +1,7 @@
 const crypto = require("crypto");
+const { Wallet } = require("ethers");
 const nacl = require("tweetnacl");
 const { Keypair } = require("@solana/web3.js");
-const toBase58 = require("bs58");
 
 // Hash an image's bytes using SHA-256 (32 bytes)
 function sha256(bytes) {
@@ -60,6 +60,19 @@ function keypairFromEd25519Seed(seed32) {
   const secretKey = Buffer.from(kp.secretKey); // 64 bytes
   return Keypair.fromSecretKey(secretKey);
 }
+function ethKeypairFromSeed(seed32) {
+  if (seed32.length !== 32) throw new Error("seed must be 32 bytes");
+
+  // Use seed as the private key
+  const privateKeyHex = "0x" + seed32.toString("hex");
+  const wallet = new Wallet(privateKeyHex);
+
+  return {
+    privateKey: wallet.privateKey,
+    publicKey: wallet.publicKey,
+    address: wallet.address,
+  };
+}
 
 function bufferToBase64(buffer) {
   return buffer.toString("base64");
@@ -70,4 +83,5 @@ module.exports = {
   deriveSeedHKDF,
   keypairFromEd25519Seed,
   bufferToBase64,
+  ethKeypairFromSeed,
 };
