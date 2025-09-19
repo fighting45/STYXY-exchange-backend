@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const createProfileRoute = require("./src/routes/createProfile");
 const walletRoute = require("./src/routes/wallet");
+const swapRoute = require("./src/routes/swap");
 require("dotenv").config();
 
 const app = express();
@@ -28,6 +29,7 @@ mongoose.connection.on("disconnected", () => {
 
 app.use("/profiles", createProfileRoute);
 app.use("/wallet", walletRoute);
+app.use("/swap", swapRoute);
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");

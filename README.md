@@ -129,6 +129,62 @@ GET /wallets/12345
 - **200 OK** with the wallet information if found.
 - **404 Not Found** if no wallet exists for the given `userID`.
 
+### 6. **POST /swap/**
+
+This route sends a swap transaction via jupiter for a user. It takes following fileds as part of the request body to make a swap tx:
+
+- **Request Body**:
+
+  - **InputMint**: The token you want to swap.
+  - **OutputMint**: The token you want your tokens to swap to.
+  - **Amount**: The amount of input tokens to swap.
+  - **Action**: Sell or Buy action.
+  - **WalletAddress**: The WalletAddress of the owner of the swap.
+  - **Network**: Provide the network i.e. "Ethereum" or "Solana".
+
+**Example Request:**
+
+```bash
+POST /swap
+Content-Type: raw/json
+{
+  "inputMint": "So11111111111111111111111111111111111111112",
+  "outputMint": "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v",
+  "amount": "1000000",
+  "action": "buy",
+  "network": "solana",
+  "walletAddress": "8RR7P3s9mDynhJwWG3sSgwnujKV4Mrz8NLqP3Gy8gLcR"
+}
+
+```
+
+**Response:**
+
+- **200 Created** with swap details if the swap is successfull.
+- **400 Bad Request** if swap fails.
+
+### 7. **GET /swap/\:walletAddress**
+
+This jwt protected route retrieves all the transactions associated with a specific wallet address.
+
+- **URL Parameters**:
+
+  - `walletAddress`: The wallet address of the user.
+  - `jwt`: A valid access token in auth headers for authentication.
+
+**Example Request:**
+
+```bash
+GET /swap/\:{walletAddress}
+Content-Type: params
+```
+
+**Response:**
+
+- **200 OK** with the wallet information if found.
+- **401 Unauthorized** If accesstoken is not provided or is incorrect.
+- **400 Not Found** if no wallet exists for the given `userID`.
+
 ---
 
 ## Project Setup
@@ -139,6 +195,7 @@ Make sure you have the following installed:
 
 - **Node.js** (v12.x or higher)
 - **MongoDB** (locally or MongoDB Atlas)
+- **Docker**
 
 ### Install Dependencies
 

@@ -1,18 +1,12 @@
-const { verifyAccessToken } = require("../services/tokenServices");
+const { verifyAccessToken } = require("../utils/jwtTokenUtils");
 
-const authenticateToken = (token) => {
-  verifyAccessToken(token, (err, user) => {
-    if (err) {
-      return res.status(403).json({ message: "Invalid Access Token" });
-    }
-
-    return res.json(201).json({
-      message: "user retrieved successfully",
-      data: {
-        userProfile: user,
-      },
-    });
-  });
+const authenticateToken = (token, callback) => {
+  try {
+    const user = verifyAccessToken(token);
+    callback(null, user); // No error, pass the user to the callback
+  } catch (err) {
+    callback(err, null); // Pass the error if token is invalid
+  }
 };
 
 module.exports = { authenticateToken };

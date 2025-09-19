@@ -1,9 +1,10 @@
 {
 	"info": {
-		"_postman_id": "d0ad156d-3fc0-4fb8-9320-e661f14eac4c",
-		"name": "Web3 Exchange",
+		"_postman_id": "0b4a0609-a600-46d7-8417-e188a50397be",
+		"name": "Styxy Exchange",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "24458505"
+		"_exporter_id": "44610632",
+		"_collection_link": "https://usamahassan-6313897.postman.co/workspace/Usama-Hassan's-Workspace~51232930-a77d-480c-824f-941c936a39c6/collection/44610632-0b4a0609-a600-46d7-8417-e188a50397be?action=share&source=collection_link&creator=44610632"
 	},
 	"item": [
 		{
@@ -13,7 +14,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n  \"email\": \"ehtasham@gmail.com\",\n  \"fullname\": \"ehtasham\",\n  \"speciality\": \"patient\",\n  \"loginType\": \"socials\"\n}",
+					"raw": "{\n  \"email\": \"wajahat21222222@gmail.com\",\n  \"fullname\": \"ehtasham\",\n  \"speciality\": \"patient\",\n  \"loginType\":\"socials\"\n  \n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -136,7 +137,7 @@
 					"formdata": []
 				},
 				"url": {
-					"raw": "http://localhost:3000/wallet/b368c7e2-85b6-4fa3-b494-ed0ec34b9e8c",
+					"raw": "http://localhost:3000/wallet/6f2c9a2d-3253-4d82-a04b-bbbc4e4d53a4",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -144,7 +145,63 @@
 					"port": "3000",
 					"path": [
 						"wallet",
-						"b368c7e2-85b6-4fa3-b494-ed0ec34b9e8c"
+						"6f2c9a2d-3253-4d82-a04b-bbbc4e4d53a4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "SolanaSwap",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"inputMint\": \"So11111111111111111111111111111111111111112\",\n  \"outputMint\": \"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v\",\n  \"amount\": \"1000000\",\n  \"action\": \"buy\",\n  \"network\": \"solana\",\n  \"walletAddress\": \"FdtsnjvDHRA87uvvjxZpH44gA982KDzBXhboUP7zcBhc\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/swap/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"swap",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fetchAllTxs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"inputMint\": \"So11111111111111111111111111111111111111112\",\n  \"outputMint\": \"EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v\",\n  \"amount\": \"1000000\",\n  \"action\": \"buy\",\n  \"network\": \"solana\",\n  \"walletAddress\": \"FdtsnjvDHRA87uvvjxZpH44gA982KDzBXhboUP7zcBhc\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/swap/FdtsnjvDHRA87uvvjxZpH44gA982KDzBXhboUP7zcBhc",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"swap",
+						"FdtsnjvDHRA87uvvjxZpH44gA982KDzBXhboUP7zcBhc"
 					]
 				}
 			},

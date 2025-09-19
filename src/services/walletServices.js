@@ -1,8 +1,8 @@
 const { v4: uuidv4 } = require("uuid");
 const cryptoService = require("./cryptoServices");
-const privateKeyServices = require("./privateKeyServices");
+const privateKeyServices = require("../utils/privateKeyUtils");
 const Wallet = require("../models/wallet");
-const vaultService = require("./vaultService");
+const vaultService = require("../utils/vaultUtils");
 const bs58 = require("bs58");
 
 const generateUUID = () => {

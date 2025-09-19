@@ -1,4 +1,4 @@
-const { generateAccessToken } = require("../services/tokenServices");
+const { generateAccessToken } = require("../utils/jwtTokenUtils");
 const { authenticateToken } = require("../auth/authMiddleware");
 const UserProfile = require("../models/UserProfile");
 
@@ -45,25 +45,26 @@ const createProfile = async (req, res) => {
 
 // GET Profile Controller
 const getProfile = async (req, res) => {
-  try {
-    const { userID } = req.params;
-    const bearer = req.headers.authorization?.split(" ");
-    const token = bearer[1];
+  const { userID } = req.params;
+  const bearer = req.headers.authorization?.split(" ");
 
-    if (!token) {
-      res.status(403).json({ message: "Access token is missing!" });
-    }
-    authenticateToken(token);
+  if (!bearer) {
+    res.status(401).json({ message: "Access token is missing!" });
+  }
+  if (!userID) {
+    return res.status(400).json({
+      success: false,
+      message: "UserID is required",
+    });
+  }
+  const token = bearer[1];
 
-    if (!userID) {
-      return res.status(400).json({
-        success: false,
-        message: "UserID is required",
-      });
+  authenticateToken(token, async (err, user) => {
+    if (err) {
+      return res.status(401).json({ message: "Unauthorized Request" });
     }
 
     console.log("Fetching profile for userID:", userID);
-
     const userProfile = await UserProfile.findOne({ userID })
       .maxTimeMS(10000)
       .lean()
@@ -75,7 +76,6 @@ const getProfile = async (req, res) => {
         message: "Profile not found",
       });
     }
-
     res.status(200).json({
       success: true,
       message: "Profile retrieved successfully",
@@ -83,18 +83,16 @@ const getProfile = async (req, res) => {
         userProfile: userProfile,
       },
     });
-  } catch (error) {
-    console.error("Error retrieving profile:", error);
-
-    res
-      .status(500)
-      .json({ message: "Error retrieving profile", error: error.message });
-  }
+  });
 };
 
 // Update Profile Controller
 const updateProfile = async (req, res) => {
   try {
+    const bearer = req.headers.authorization?.split(" ");
+    if (!bearer) {
+      res.status(401).json({ message: "Access token is missing!" });
+    }
     const { userID } = req.params;
     const { email, fullname, speciality, loginType } = req.body;
 
@@ -112,43 +110,48 @@ const updateProfile = async (req, res) => {
         required: ["email", "fullname", "speciality", "loginType"],
       });
     }
-
-    console.log("Updating profile for userID:", userID);
-    console.log("Update data:", { email, fullname, speciality, loginType });
-
-    const updatedProfile = await UserProfile.findOneAndUpdate(
-      { userID },
-      {
-        $set: {
-          email,
-          fullname,
-          speciality,
-          loginType,
-        },
-      },
-      {
-        new: true, // Return updated document
-        runValidators: true, // Run schema validators
-        maxTimeMS: 10000, // Set timeout
-        lean: true, // Return plain object for better performance
+    const token = bearer[1];
+    authenticateToken(token, async (err, user) => {
+      if (err) {
+        return res.status(401).json({ message: "Unauthorized Request" });
       }
-    ).exec();
+      console.log("Updating profile for userID:", userID);
+      console.log("Update data:", { email, fullname, speciality, loginType });
 
-    if (!updatedProfile) {
-      return res.status(404).json({
-        success: false,
-        message: "Profile not found",
+      const updatedProfile = await UserProfile.findOneAndUpdate(
+        { userID },
+        {
+          $set: {
+            email,
+            fullname,
+            speciality,
+            loginType,
+          },
+        },
+        {
+          new: true, // Return updated document
+          runValidators: true, // Run schema validators
+          maxTimeMS: 10000, // Set timeout
+          lean: true, // Return plain object for better performance
+        }
+      ).exec();
+
+      if (!updatedProfile) {
+        return res.status(404).json({
+          success: false,
+          message: "Profile not found",
+        });
+      }
+
+      console.log("✅ User profile updated successfully");
+
+      res.status(200).json({
+        success: true,
+        message: "Profile updated successfully",
+        data: {
+          userProfile: updatedProfile,
+        },
       });
-    }
-
-    console.log("✅ User profile updated successfully");
-
-    res.status(200).json({
-      success: true,
-      message: "Profile updated successfully",
-      data: {
-        userProfile: updatedProfile,
-      },
     });
   } catch (error) {
     console.error("Error updating profile:", error);
