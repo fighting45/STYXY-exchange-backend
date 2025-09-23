@@ -1,6 +1,9 @@
 # Styxy Exchange Backend
 
-This is the backend for the **Styxy Exchange** project, which handles user profiles and wallet creation.
+This is the backend for the **Styxy Exchange** project, which handles:
+1- User profile signups with socials or web3.
+2- Unique web3 "Solana" & "Ethereum" wallet creation with 3 images provided by user on signup page.
+3- Enables solana swaps via Jupiter.
 
 ## Routes
 
@@ -241,7 +244,7 @@ The server will run on `http://localhost:3000` by default.
 - **Node.js**: JavaScript runtime for building the server.
 - **Express**: Web framework for Node.js.
 - **MongoDB**: Database to store user profiles and wallets.
-- **Mongoose**: MongoDB ODM (Object Data Modeling) library for Node.js.
+- **Jupuiter**: Dex Aggregator for solana swaps.
 - **Docker**: Docker vault used to store and fetch encrypted private key of the generated wallets.
 
 ---

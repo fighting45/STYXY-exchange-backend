@@ -48,7 +48,8 @@ async function createWalletInDB(imagesBuffers, network) {
   }
   const { encryptedPrivateKey, iv } =
     privateKeyServices.encryptPrivateKey(privateKey); //returns iv and the private key
-  vaultService.storePrivateKey(userID, encryptedPrivateKey, iv);
+  console.log("this is the network", network);
+  vaultService.storePrivateKey(userID, encryptedPrivateKey, iv, network);
 
   const newWallet = new Wallet({
     userID,

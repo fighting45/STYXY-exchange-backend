@@ -9,8 +9,10 @@ const solanaSwap = async (req, res) => {
   const { inputMint, outputMint, amount, action, network, walletAddress } =
     req.body;
   const walletInstance = await Wallet.findOne({ walletAddress });
+
   const userID = walletInstance.userID;
-  const { iv, private_key } = await getPrivateKey(userID);
+
+  const { iv, private_key } = await getPrivateKey(userID, network);
 
   const privateKey = decryptPrivateKey(iv, private_key);
 

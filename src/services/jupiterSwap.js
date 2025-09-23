@@ -9,10 +9,6 @@ const {
 
 const connection = new Connection(clusterApiUrl("mainnet-beta"));
 
-// const inputMint = "So11111111111111111111111111111111111111112"; // SOL
-// const outputMint = "EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v"; // USDC
-// const amount = "1000000";
-
 async function swap(outputMint, inputMint, amount, privateKey) {
   const url = `https://quote-api.jup.ag/v6/quote?outputMint=${outputMint}&inputMint=${inputMint}&amount=${amount}`;
   let quoteResponse;

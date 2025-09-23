@@ -4,12 +4,11 @@ const vault = require("node-vault")({
   token: "root",
 });
 
-async function storePrivateKey(userID, privateKey, ivHex) {
+async function storePrivateKey(userID, privateKey, ivHex, network) {
   try {
-    const path = `secret/data/solana_wallets/${userID}`;
+    const path = `secret/data/${network}/${userID}`;
     const data = {
       data: {
-        // Nested `data` field to match Vault API format
         private_key: privateKey,
         iv: ivHex,
         userID: userID,
@@ -22,9 +21,9 @@ async function storePrivateKey(userID, privateKey, ivHex) {
   }
 }
 
-async function getPrivateKey(userID) {
+async function getPrivateKey(userID, network) {
   try {
-    const path = `secret/data/solana_wallets/${userID}`;
+    const path = `secret/data/${network}/${userID}`;
     const response = await vault.read(path);
     return response.data.data;
   } catch (err) {

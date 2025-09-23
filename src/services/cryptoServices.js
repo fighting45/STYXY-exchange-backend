@@ -64,11 +64,11 @@ function ethKeypairFromSeed(seed32) {
   if (seed32.length !== 32) throw new Error("seed must be 32 bytes");
 
   // Use seed as the private key
-  const privateKeyHex = "0x" + seed32.toString("hex");
+  const privateKeyHex = seed32.toString("hex");
   const wallet = new Wallet(privateKeyHex);
 
   return {
-    privateKey: wallet.privateKey,
+    privateKey: privateKeyHex,
     publicKey: wallet.publicKey,
     address: wallet.address,
   };

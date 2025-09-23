@@ -70,7 +70,8 @@ const getWallet = async (req, res) => {
       console.log("Fetching wallet by userID:", userID);
       const wallet = await walletServices.getWalletByUserID(userID);
       if (!wallet) return res.status(404).json({ message: "Wallet not found" });
-      const encryptedData = await getPrivateKey(userID);
+      const network = wallet.network;
+      const encryptedData = await getPrivateKey(userID, network);
       if (!encryptedData) {
         return res
           .status(404)
