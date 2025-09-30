@@ -3,7 +3,7 @@ name: Run Prettier & Lint
 on:
   pull_request:
   push:
-    branches: [ main, devops, QA ] # adjust branches as needed
+    branches: [main, devops, QA] # adjust branches as needed
 
 jobs:
   check-code-style:

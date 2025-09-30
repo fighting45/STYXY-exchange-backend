@@ -38,7 +38,6 @@ This route is used to create a new user profile, when successfully created it se
 This route fetches the profile of a user by their `userID` and by providing access token in as the auth header as a bearer token.
 
 - **URL Parameters**:
-
   - `userID`: The unique ID of the user.
   - `accessToken`: Passed as a bearer in the auth while sending request.
 
@@ -58,11 +57,9 @@ GET /profiles/12345
 This route updates an existing user profile. The user profile can be modified by providing new data for the fields.
 
 - **URL Parameters**:
-
   - `userID`: The unique ID of the user whose profile needs to be updated.
 
 - **Request Body**:
-
   - `email`: The updated email of the user.
   - `fullname`: The updated full name of the user.
   - `speciality`: The updated speciality of the user, either `"patient"` or `"doctor"`.
@@ -90,7 +87,6 @@ This route updates an existing user profile. The user profile can be modified by
 This route creates a wallet for a user. It accepts **3 images** as part of the request body to generate a unique wallet based on them.
 
 - **Request Body**:
-
   - **3 image files**: The images should be uploaded as files (e.g., `image1`, `image2`, `image3`).
   - **Network**: Provide the network i.e. "Ethereum" or "Solana".
 
@@ -118,7 +114,6 @@ Content-Type: multipart/form-data
 This route retrieves the wallet associated with a specific user by their `userID`.
 
 - **URL Parameters**:
-
   - `userID`: The unique ID of the user.
 
 **Example Request:**
@@ -137,7 +132,6 @@ GET /wallets/12345
 This route sends a swap transaction via jupiter for a user. It takes following fileds as part of the request body to make a swap tx:
 
 - **Request Body**:
-
   - **InputMint**: The token you want to swap.
   - **OutputMint**: The token you want your tokens to swap to.
   - **Amount**: The amount of input tokens to swap.
@@ -171,7 +165,6 @@ Content-Type: raw/json
 This jwt protected route retrieves all the transactions associated with a specific wallet address.
 
 - **URL Parameters**:
-
   - `walletAddress`: The wallet address of the user.
   - `jwt`: A valid access token in auth headers for authentication.
 

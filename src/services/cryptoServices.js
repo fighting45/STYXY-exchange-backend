@@ -20,7 +20,7 @@ function concatImageHashes(imagesBuffers) {
 
 function deriveSeedHKDF(
   ikmBuffer,
-  { salt, info = "solana-image-seed", length = 32 } = {}
+  { salt, info = "solana-image-seed", length = 32 } = {},
 ) {
   if (!salt) {
     salt = crypto.randomBytes(16);
@@ -37,7 +37,7 @@ function deriveSeedHKDF(
     derived = Buffer.from(
       derived.buffer,
       derived.byteOffset,
-      derived.byteLength
+      derived.byteLength,
     );
   } else if (!Buffer.isBuffer(derived)) {
     derived = Buffer.from(derived);
@@ -45,7 +45,7 @@ function deriveSeedHKDF(
 
   if (derived.length !== length) {
     throw new Error(
-      `KDF output length mismatch: got ${derived.length}, expected ${length}`
+      `KDF output length mismatch: got ${derived.length}, expected ${length}`,
     );
   }
 

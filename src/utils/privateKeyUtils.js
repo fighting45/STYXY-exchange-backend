@@ -17,7 +17,7 @@ function decryptPrivateKey(iv, encryptedPrivateKey) {
   const decipher = crypto.createDecipheriv(
     "aes-256-cbc",
     encryptionKey,
-    Buffer.from(iv, "hex")
+    Buffer.from(iv, "hex"),
   );
 
   let decrypted = decipher.update(encryptedPrivateKey, "hex", "utf8");
