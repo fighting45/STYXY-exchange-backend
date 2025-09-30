@@ -133,7 +133,7 @@ const updateProfile = async (req, res) => {
           runValidators: true, // Run schema validators
           maxTimeMS: 10000, // Set timeout
           lean: true, // Return plain object for better performance
-        }
+        },
       ).exec();
 
       if (!updatedProfile) {

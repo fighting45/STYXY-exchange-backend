@@ -29,7 +29,7 @@ const createWallet = async (req, res) => {
 
     const { newWallet, privateKey } = await walletServices.createWalletInDB(
       imageBuffers,
-      network
+      network,
     );
     if (!newWallet || !privateKey) console.log("No wallet created");
     res.status(201).json({

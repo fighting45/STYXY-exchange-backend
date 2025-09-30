@@ -31,7 +31,7 @@ const userProfileSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-  }
+  },
 );
 userProfileSchema.index({ userID: 1, email: 1 });
 
