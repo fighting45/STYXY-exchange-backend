@@ -1,28 +1,99 @@
-name: Run Prettier & Lint
+name: Deploy app with Docker Compose
 
 on:
-  pull_request:
   push:
-    branches: [main, devops, QA] # adjust branches as needed
+    branches: ["devops"]
 
 jobs:
-  check-code-style:
+  deploy:
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18 # change if your project uses another version
+      - name: Prepare SSH key & known_hosts
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+        run: |
+          set -e
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -p "$SSH_PORT" "$SSH_HOST" >> ~/.ssh/known_hosts
+          chmod 644 ~/.ssh/known_hosts
 
-      - name: Install dependencies
-        run: npm install
+      # Build a runtime env file from GitHub Secrets(never committed to git)
+      - name: Create .env.app (runtime env)
+        run: |
+          cat > .env.app <<'EOF'
+          DB_URI=${{ secrets.DB_URI }}
+          JWT_SECRET=${{ secrets.JWT_SECRET }}
+          ACCESS_TOKEN_SECRET=${{ secrets.ACCESS_TOKEN_SECRET }}
+          ENCRYPTION_KEY=${{ secrets.ENCRYPTION_KEY }}
+          VAULT_TOKEN=${{ secrets.VAULT_TOKEN }}
+          EOF
 
-      - name: Run Prettier
-        run: npm run prettier
+      - name: Upload code and env to server (/tmp/app)
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+        run: |
+          set -e
+          ssh -i ~/.ssh/id_rsa -p "$SSH_PORT" -o StrictHostKeyChecking=yes \
+            "${SSH_USER}@${SSH_HOST}" 'mkdir -p /tmp/app'
+          # include .env.app in the archive we send
+          tar -czf - --exclude '.git' --exclude '.github' --exclude 'node_modules' .env.app . \
+          | ssh -i ~/.ssh/id_rsa -p "$SSH_PORT" -o StrictHostKeyChecking=yes \
+              "${SSH_USER}@${SSH_HOST}" 'tar -xzf - -C /tmp/app'
 
-      - name: Run Lint
-        run: npm run lint
+      - name: Deploy with docker compose (non-interactive, uses .env.app)
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+        run: |
+          set -e
+          ssh -i ~/.ssh/id_rsa -p "$SSH_PORT" -o StrictHostKeyChecking=yes "${SSH_USER}@${SSH_HOST}" '
+            set -euo pipefail
+
+            # stage to /mnt/app
+            sudo mkdir -p /mnt/app
+            sudo rm -rf /mnt/app/* || true
+            sudo cp -r /tmp/app/* /mnt/app/
+            cd /mnt/app
+
+            # pull down any old stack first (with the same env)
+            docker compose --env-file .env.app down --remove-orphans || true
+
+            # bring up Vault first so "localhost:8200" is ready in the shared namespace
+            docker compose --env-file .env.app up -d --build vault
+
+            # wait for Vault to respond on 8200 inside the vault container
+            echo "Waiting for Vault to become healthy..."
+            for i in $(seq 1 30); do
+              if docker exec vault sh -lc "apk add --no-cache curl >/dev/null 2>&1 || true; \
+                   curl -fsS http://127.0.0.1:8200/v1/sys/health >/dev/null"; then
+                echo "Vault is up."
+                break
+              fi
+              sleep 2
+            done
+
+            # now bring up the app (shares Vaults net: tests will see localhost:8200)
+            docker compose --env-file .env.app up -d --build app
+
+            # optional: prune old images (safe-ish)
+            docker image prune -f || true
+          '
+
+      - name: Verify containers running
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ secrets.SSH_PORT || '22' }}
+        run: |
+          ssh -i ~/.ssh/id_rsa -p "$SSH_PORT" -o StrictHostKeyChecking=yes \
+            "${SSH_USER}@${SSH_HOST}" 'docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
