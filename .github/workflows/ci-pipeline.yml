@@ -2,7 +2,7 @@ name: Deploy app with Docker Compose
 
 on:
   push:
-    branches: ["devops"]
+    branches: ["main"]
 
 jobs:
   deploy:
