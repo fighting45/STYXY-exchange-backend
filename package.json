@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node app.js",
     "test": "cross-env NODE_ENV=test jest --coverage",
-    "dev": "npm run test"
+    "dev": "nodemon app.js"
   },
   "jest": {
     "testEnvironment": "node"
