@@ -3,6 +3,8 @@ const mongoose = require("mongoose");
 const createProfileRoute = require("./src/routes/createProfile");
 const walletRoute = require("./src/routes/wallet");
 const swapRoute = require("./src/routes/swap");
+const stakingRoute = require("./src/routes/staking");
+const governanceRoute = require("./src/routes/governance");
 require("dotenv").config();
 
 const app = express();
@@ -30,6 +32,8 @@ mongoose.connection.on("disconnected", () => {
 app.use("/profiles", createProfileRoute);
 app.use("/wallet", walletRoute);
 app.use("/swap", swapRoute);
+app.use("/staking", stakingRoute);
+// app.use("/governance", governanceRoute);
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");
