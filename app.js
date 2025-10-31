@@ -33,7 +33,7 @@ app.use("/profiles", createProfileRoute);
 app.use("/wallet", walletRoute);
 app.use("/swap", swapRoute);
 app.use("/staking", stakingRoute);
-// app.use("/governance", governanceRoute);
+app.use("/governance", governanceRoute);
 
 app.listen(3000, () => {
   console.log("Server running on port 3000");

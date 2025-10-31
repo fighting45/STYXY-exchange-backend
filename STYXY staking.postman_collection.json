@@ -1,0 +1,328 @@
+{
+	"info": {
+		"_postman_id": "3d846ccd-7fb9-4479-af98-1c2129e021aa",
+		"name": "STYXY staking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44610632",
+		"_collection_link": "https://usamahassan-6313897.postman.co/workspace/Usama-Hassan's-Workspace~51232930-a77d-480c-824f-941c936a39c6/collection/44610632-3d846ccd-7fb9-4479-af98-1c2129e021aa?action=share&source=collection_link&creator=44610632"
+	},
+	"item": [
+		{
+			"name": "RewardPool",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/staking/rewardPool",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"rewardPool"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Reward Rate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/staking/rewardRate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"rewardRate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LockupPeriod",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/staking/lockupPeriod",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"lockupPeriod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UserStakeInfo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/stakeInfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"stakeInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "TotalStaked",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/totalStaked",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"totalStaked"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Stake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"100\",\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/stake",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"stake"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unstake",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"100\",\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/unstake",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"unstake"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ClaimReward",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/claimReward",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"claimReward"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateAPR",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"newAPR\": \"100\",\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/updateAPR",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"updateAPR"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AddRewards",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"1000\",\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/addRewards",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"addRewards"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "LockupPeriod",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"1000\",\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/lockupPeriod",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"lockupPeriod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "emergencyWithdraw",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\": \"1000\",\n    \"userAddress\": \"0x516765421af27C165056b139b3E7bca64eB60da5\",\n    \"tokenAddress\": \"0x7130330e47725098dE6ab9AfD5C78f5aAA83d300\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/staking/emergencyWithdraw",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"staking",
+						"emergencyWithdraw"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -2,7 +2,7 @@
   "sepolia": {
     "MyToken": "0x7130330e47725098dE6ab9AfD5C78f5aAA83d300",
     "Staking": "0xFB8d1234122dd643c83D8726c06660542669b6b2",
-    "Vesting": "0xbbb...bbb",
+    "tokenVesting": "0xacf2ed4541a87142e3E65b7b81E91331F83c172b",
     "Governance": "0x320aF78DFa6dFF14258190a841B4b1113fd572C9"
   }
 }

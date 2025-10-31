@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "3f5e9737-04f5-4728-b897-c08439243786",
+		"name": "STYXY Governance",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44610632",
+		"_collection_link": "https://usamahassan-6313897.postman.co/workspace/Usama-Hassan's-Workspace~51232930-a77d-480c-824f-941c936a39c6/collection/44610632-3f5e9737-04f5-4728-b897-c08439243786?action=share&source=collection_link&creator=44610632"
+	},
+	"item": [
+		{
+			"name": "getProposal",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/proposal",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"proposal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Propose",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"target\": \"0xFB8d1234122dd643c83D8726c06660542669b6b2\",\n    \"value\": \"0\",\n    \"data\":{\n        \"functionName\":\"getAPR\",\n        \"abi\":[{\n        \"inputs\": [],\n        \"name\": \"getAPR\",\n        \"outputs\": [\n        {\n            \"internalType\": \"uint256\",\n            \"name\": \"\",\n            \"type\": \"uint256\"\n        }\n    ],\n     \"stateMutability\": \"view\",\n    \"type\": \"function\"\n  }],\n        \"args\": []   \n    },\n    \"description\":\"Lets fetch current APR for STYXY's staking contract \"\n}   ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/propose",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"propose"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "proposalsCount",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/proposalsCount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"proposalsCount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getState",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"proposalId\": \"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/state",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"state"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "hasVoted",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"proposalId\": \"0\",\n    \"address\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/hasVoted",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"hasVoted"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VotingPeriod",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/votingPeriod",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"votingPeriod"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "proposalThreshold",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/proposalThreshold",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"proposalThreshold"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "quorumVotes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/quorumVotes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"quorumVotes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "castVote",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"proposalId\":\"0\",\n    \"support\":\"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/castVote",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"castVote"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "execute",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"proposalId\":\"0\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/governance/execute",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"governance",
+						"execute"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
