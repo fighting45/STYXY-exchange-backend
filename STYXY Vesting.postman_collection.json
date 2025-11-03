@@ -1,0 +1,461 @@
+{
+	"info": {
+		"_postman_id": "a97f15bc-8880-4bab-b7ee-62f0fa53015b",
+		"name": "STYXY Vesting",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44610632",
+		"_collection_link": "https://usamahassan-6313897.postman.co/workspace/Usama-Hassan's-Workspace~51232930-a77d-480c-824f-941c936a39c6/collection/44610632-a97f15bc-8880-4bab-b7ee-62f0fa53015b?action=share&source=collection_link&creator=44610632"
+	},
+	"item": [
+		{
+			"name": "getToken",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/vesting/token",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cliffDuration",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "allocations",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "released",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/released",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"released"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "revoked",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/released",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"released"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/beneficiaries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"beneficiaries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "totalAllocated",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"walletAddress\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/totalAllocated",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"totalAllocated"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "paused",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "releasableAmount",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"beneficiary\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/releasableAmount",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"releasableAmount"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getVestingInfo",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"beneficiary\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/getVestingInfo",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"getVestingInfo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "isCliffPassed",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getContactStatus",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "getBeneficiaries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/vesting/getBeneficiaries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"getBeneficiaries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setBeneficiaries",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"beneficiaries\":[\"0x516765421af27C165056b139b3E7bca64eB60da5\"],\n    \"allocations\":[\"256\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/setBeneficiaries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"setBeneficiaries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "fund",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"amount\":\"256\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/fund",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"fund"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "pause",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/pause",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"pause"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "unpause",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/unpause",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"unpause"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "revokeBeneficiary",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"beneficiary\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/revokeBeneficiary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"revokeBeneficiary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"beneficiary\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/unrevokeBeneficiary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"unrevokeBeneficiary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "New Request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"beneficiary\":\"0x516765421af27C165056b139b3E7bca64eB60da5\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/vesting/release",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"vesting",
+						"release"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
